@@ -1,7 +1,11 @@
 <!doctype html>
 <html lang="en">
+
+{% load static %}
+<!-- <div>Icons made by <a href="https://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+ -->
 <head>
-	<title>Fiber i Gr‰ftÂvallen</title> 
+	<title>Fiber i Gr√§ft√•vallen</title> 
 
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw==" crossorigin=""/>
 	<script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js" integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA==" crossorigin=""></script>   
@@ -27,7 +31,7 @@
 	
 </head>
 <body>
-	<h1 id="title">Fiber i Gr‰ftÂvallen</h1>
+	<h1 id="title">Fiber i Gr√§ft√•vallen</h1>
 	<div id="map"></div>
 	<script>
 		center = new L.LatLng(63.02425, 13.93981);
@@ -38,7 +42,26 @@
 			maxZoom: 18,
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
 		}).addTo(map);
-	
+
+ 		var greenIcon = L.icon({
+ 		    iconUrl: '{% static "images/map-marker-green.png" %}',
+ 		    iconSize: [32, 32]
+ 		});	 		
+ 		var redIcon = L.icon({
+ 		    iconUrl: '{% static "images/map-marker-red.png" %}',
+ 		    iconSize: [32, 32]
+ 		});	 		
+ 		var greenIconX = L.icon({
+ 		    iconUrl: '{% static "images/marker-icon.png" %}',
+ 		    iconRetinaUrl: '{% static "images/marker-2x.png" %}',
+ 		    shadowUrl: '{% static "images/marker-shadow.png" %}',
+ 		    iconSize: [25, 41],
+ 		    iconAnchor: [12, 41],
+ 		    popupAnchor: [1, -34],
+ 		    tooltipAnchor: [16, -28],
+ 		    shadowSize: [41, 41]
+ 		});	 		
+
 		function getPins(e){	
 			bounds = map.getBounds();
 			url = "places?lat1=" + bounds.getNorthEast().lat + "&lon1=" + bounds.getNorthEast().lng + "&lat2=" + bounds.getSouthWest().lat + "&lon2=" + bounds.getSouthWest().lng;
@@ -54,7 +77,7 @@
 			for (var i = 0; i < data.length; i++){
 				fastighet = data[i];
 				var popupInformation = "<b>" + fastighet.fastighet + "</b></br>" + fastighet.adress + "</br>";
-				markerArray[i] = L.marker([fastighet.position[0], fastighet.position[1]]).bindPopup(popupInformation);			
+				markerArray[i] = L.marker([fastighet.position[0], fastighet.position[1]], {icon: fastighet.status=="Ja"?greenIcon:redIcon}).bindPopup(popupInformation);			
 			}
 			markerLayerGroup = L.layerGroup(markerArray).addTo(map);	
 		}

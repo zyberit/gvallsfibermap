@@ -46,15 +46,20 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #             lat,lon = get_gcode(adr)
 #             mcash.append({"namn":namn,"grupp":grupp,"avdelning":avd,"position":(lat,lon)})
 
-import dropbox
+# import dropbox
 from openpyxl import load_workbook
+import requests
+from io import BytesIO
 
 fibcash = []
 def fill_fibcash():
-    fiberfile = "https://www.dropbox.com/s/x41w509oshmdrjn/Fiberbest%C3%A4llning.xlsx?dl=0"
-    wb = load_workbook(filename = BASE_DIR+"/Fiberbeställning.xlsx", read_only=True)
+    fiberfile = "https://www.dropbox.com/s/x41w509oshmdrjn/Fiberbest%C3%A4llning.xlsx?dl=1"
+    r = requests.get(fiberfile)
+    wb = load_workbook(BytesIO(r.content), read_only=True)
+#     wb = load_workbook(filename = BASE_DIR+"/Fiberbeställning.xlsx", read_only=True)
     ws = wb['fiber']
     for r in range(2,ws.max_row+1):
+#         print (ws.cell(row=r,column=1).value)
         fibcash.append({"fastighet":ws.cell(row=r,column=1).value,"adress":ws.cell(row=r,column=2).value,"status":ws.cell(row=r,column=4).value,"position":ws.cell(row=r,column=3).value.split(",")})
             
 
