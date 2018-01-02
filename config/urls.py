@@ -16,11 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 # from django.contrib import admin
 
-from maptest.views import index, karta, places
+from gvallsfibermap.views import karta, places
 
 urlpatterns = [
-    url(r'^$', index),
-    url(r'^karta', karta),
+    url(r'^$', karta),
     url(r'^places', places),
 #     url(r'^admin/', admin.site.urls),
 ]
