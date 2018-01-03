@@ -59,6 +59,8 @@ def fill_fibcash():
 #     wb = load_workbook(filename = BASE_DIR+"/Fiberbeställning.xlsx", read_only=True)
     ws = wb['fiber']
     for r in range(2,ws.max_row+1):
+        if ws.cell(row=r,column=1).value == None or ws.cell(row=r,column=2).value == None:
+            break
 #         print (ws.cell(row=r,column=1).value)
         fibcash.append({"fastighet":ws.cell(row=r,column=1).value,"adress":ws.cell(row=r,column=2).value,"status":ws.cell(row=r,column=4).value,"position":ws.cell(row=r,column=3).value.split(",")})
             
