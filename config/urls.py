@@ -16,10 +16,11 @@ Including another URLconf
 from django.conf.urls import url
 # from django.contrib import admin
 
-from gvallsfibermap.views import karta, places
+from gvallsfibermap.views import karta, places, bing
 
 urlpatterns = [
     url(r'^$', karta),
     url(r'^places', places),
+    url(r'^bing', bing),
 #     url(r'^admin/', admin.site.urls),
 ]

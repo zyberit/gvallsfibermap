@@ -53,7 +53,7 @@ from io import BytesIO
 
 fibcash = []
 def fill_fibcash():
-    fiberfile = "https://www.dropbox.com/s/x41w509oshmdrjn/Fiberbest%C3%A4llning.xlsx?dl=1"
+    fiberfile = "https://www.dropbox.com/s/wuipbqguzyc5ouv/Fiberbest%C3%A4llning.xlsx?dl=1"
     r = requests.get(fiberfile)
     wb = load_workbook(BytesIO(r.content), read_only=True)
 #     wb = load_workbook(filename = BASE_DIR+"/Fiberbeställning.xlsx", read_only=True)
@@ -65,14 +65,18 @@ def fill_fibcash():
         fibcash.append({"fastighet":ws.cell(row=r,column=1).value,"adress":ws.cell(row=r,column=2).value,"status":ws.cell(row=r,column=4).value,"position":ws.cell(row=r,column=3).value.split(",")})
             
 
+def bing(request):
+    return render(request, 'bing.html')
+
 # def index(request):
 #     if len(mcash) == 0:
 #         fill_mcash()
 #     return render(request, 'index.html')
 
 def karta(request):
-    if len(fibcash) == 0:
-        fill_fibcash()
+#     if len(fibcash) == 0:
+    fibcash = []
+    fill_fibcash()
     return render(request, 'karta.html')
 
 

@@ -10,6 +10,8 @@
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw==" crossorigin=""/>
 	<script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js" integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA==" crossorigin=""></script>   
 	<script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise"></script>
+    <script src="static/leaflet-bing-layer.js"></script>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<style type="text/css">
@@ -34,14 +36,18 @@
 	<h1 id="title">Fiber i Gräftåvallen</h1>
 	<div id="map"></div>
 	<script>
-		center = new L.LatLng(63.02425, 13.93981);
-		zoom = 13;
+	    var BING_KEY = 'AuhiCJHlGzhg93IqUH_oCpl_-ZUrIE6SPftlyGYUvr9Amx5nzA-WqGcPquyFZl4L'
+        center = new L.LatLng(63.02425, 13.93981);
+		zoom = 14;
 		var map = L.map('map').setView(center, zoom);
 		var markerLayerGroup = L.layerGroup().addTo(map);
- 	 	L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		
+		L.tileLayer.bing(BING_KEY).addTo(map)
+		
+/*		L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			maxZoom: 18,
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
-		}).addTo(map);
+		}).addTo(map);*/
 
 /*  		L.tileLayer(
 		    'https://api.lantmateriet.se/open/topowebb-ccby/v1/wmts/token/39d9f1bf-989a-3ceb-8086-3335cb025406/?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=topowebb&STYLE=default&TILEMATRIXSET=3006&TILEMATRIX={z}&TILEROW={x}&TILECOL={y}&FORMAT=image%2Fpng', 
@@ -53,8 +59,8 @@
  		var redIcon = L.icon({
  		    iconUrl: '{% static "images/map-marker-red.png" %}',
  		    iconSize: [32, 32]
- 		});	 		
- 		var greenIconX = L.icon({
+ 		});
+/* 		var greenIconX = L.icon({
  		    iconUrl: '{% static "images/marker-icon.png" %}',
  		    iconRetinaUrl: '{% static "images/marker-2x.png" %}',
  		    shadowUrl: '{% static "images/marker-shadow.png" %}',
@@ -63,7 +69,7 @@
  		    popupAnchor: [1, -34],
  		    tooltipAnchor: [16, -28],
  		    shadowSize: [41, 41]
- 		});	 		
+ 		});*/	 		
 
 		function getPins(e){	
 			bounds = map.getBounds();
