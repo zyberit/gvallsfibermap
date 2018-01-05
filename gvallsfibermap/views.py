@@ -58,11 +58,18 @@ def fill_fibcash():
     wb = load_workbook(BytesIO(r.content), read_only=True)
 #     wb = load_workbook(filename = BASE_DIR+"/Fiberbeställning.xlsx", read_only=True)
     ws = wb['fiber']
-    for r in range(2,ws.max_row+1):
-        if ws.cell(row=r,column=1).value == None or ws.cell(row=r,column=2).value == None:
-            break
-#         print (ws.cell(row=r,column=1).value)
-        fibcash.append({"fastighet":ws.cell(row=r,column=1).value,"adress":ws.cell(row=r,column=2).value,"status":ws.cell(row=r,column=4).value,"position":ws.cell(row=r,column=3).value.split(",")})
+    head = True
+    for row in ws.rows:
+        if not head:
+            v1 = row[0].value
+            v2 = row[1].value
+            v3 = row[2].value
+            v4 = row[3].value
+            if v1 == None or v2 == None:
+                break
+            fibcash.append({"fastighet":v1,"adress":v2,"status":v4,"position":v3.split(",")})
+        else:
+            head = False
             
 
 def bing(request):
