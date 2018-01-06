@@ -2,21 +2,21 @@
 	"kind": "Template",
 	"apiVersion": "v1",
 	"metadata": {
-		"name": "trollscout-maptest",
+		"name": "gvallsfibermap",
 		"annotations": {
-			"openshift.io/display-name": "trollscout-maptest",
-			"description": "An trollscout-maptest example , see https://github.com/zyberit/maptest/README.md.",
-			"tags": "trollscout,mod-wsgi,httpd",
+			"openshift.io/display-name": "gvallsfibermap",
+			"description": "A map view of all fiverconnetions in Gräftåvallen , see https://github.com/zyberit/gvallsfibermap/README.md.",
+			"tags": "gvallen,mod-wsgi,httpd",
 			"iconClass": "icon-apache",
-			"template.openshift.io/long-description": "This template defines resources needed to develop a static application served by trollscout-maptest, including a build configuration and application deployment configuration.",
-			"template.openshift.io/provider-display-name": "trollscout",
-			"template.openshift.io/documentation-url": "https://github.com/zyberit/maptest.git",
+			"template.openshift.io/long-description": "This template defines resources needed to develop a static application served by gvallsfibermap, including a build configuration and application deployment configuration.",
+			"template.openshift.io/provider-display-name": "zyberit",
+			"template.openshift.io/documentation-url": "https://github.com/zyberit/gvallsfibermap.git",
 			"template.openshift.io/support-url": "https://github.com/zyberit"
 		}
 	},
 	"message": "The following service(s) have been created in your project: ${NAME}.\n\nFor more information about using this template, including OpenShift considerations, see https://github.com/openshift/httpd-ex/blob/master/README.md.",
 	"labels": {
-		"template": "trollscout-maptest"
+		"template": "gvallsfibermap"
 	},
 	"objects": [
 		{
@@ -227,7 +227,7 @@
 			"displayName": "Name",
 			"description": "The name assigned to all of the frontend objects defined in this template.",
 			"required": true,
-			"value": "maptest"
+			"value": "gvallsfibermap"
 		},
 		{
 			"name": "MEMORY_LIMIT",
@@ -241,7 +241,7 @@
 			"displayName": "Git Repository URL",
 			"description": "The URL of the repository with your application source code.",
 			"required": true,
-			"value": "https://github.com/zyberit/maptest.git"
+			"value": "https://github.com/zyberit/gvallsfibermap.git"
 		},
 		{
 			"name": "SOURCE_REPOSITORY_REF",
@@ -252,7 +252,7 @@
 			"name": "APPLICATION_DOMAIN",
 			"displayName": "Application Hostname",
 			"description": "The exposed hostname that will route to the httpd service, if left blank a value will be defaulted.",
-			"value": "var-bor-scouterna.apps.violaberg.nu"
+			"value": "gvallsfiber.cloud-apps.se"
 		},
 		{
 			"name": "GITHUB_WEBHOOK_SECRET",
