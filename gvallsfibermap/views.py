@@ -62,8 +62,9 @@ def places(request):
     ret = []
     for f in fibcash:
         lat,lon = f['position']
+        if f['status'] == "Ja":
 #         if lat < lat1 and lat >lat2 and lon < lon1 and lon > lon2:
-        ret.append({"fastighet":f['fastighet'],"adress":f['adress'],"status":f['status'],"position":[lat,lon]})
+           ret.append({"fastighet":f['fastighet'],"adress":f['adress'],"status":f['status'],"position":[lat,lon]})
     return HttpResponse(json.dumps(ret), content_type='application/json')
 
 
